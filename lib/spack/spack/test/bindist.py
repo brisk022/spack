@@ -15,7 +15,6 @@ import spack.repo
 import spack.store
 import spack.binary_distribution as bindist
 import spack.cmd.buildcache as buildcache
-import spack.cmd.repo as repocmd
 import spack.cmd.install as install
 import spack.cmd.uninstall as uninstall
 import spack.cmd.mirror as mirror
@@ -161,11 +160,6 @@ def install_dir_non_default_layout(tmpdir):
 
 @pytest.fixture(scope='session')
 def config_setup():
-    # add builtin.mock repo
-    rparser = argparse.ArgumentParser()
-    repocmd.setup_parser(rparser)
-    rargs = rparser.parse_args(['add', spack.paths.mock_packages_path])
-    repocmd.repo(rparser, rargs)
     # Set some spec name used globally
     zspec = Spec('garply')
     zspec.concretize()
@@ -185,6 +179,7 @@ def test_default_rpaths_create_install_default_layout(tmpdir,
                                                       mirror_directory_def,
                                                       config_setup,
                                                       mock_stage,
+                                                      mock_repo,
                                                       mock_packages,
                                                       ):
     """
@@ -279,6 +274,7 @@ def test_default_rpaths_create_install_default_layout(tmpdir,
                          'install_dir_non_default_layout')
 def test_default_rpaths_install_nondefault_layout(tmpdir, config_setup,
                                                   mock_stage,
+                                                  mock_repo,
                                                   mock_packages):
     """
     Test the creation and installation of buildcaches with default rpaths
@@ -324,7 +320,7 @@ def test_default_rpaths_install_nondefault_layout(tmpdir, config_setup,
                          'install_dir_default_layout')
 def test_relative_rpaths_create_default_layout(tmpdir, mirror_directory_rel,
                                                config_setup, mock_stage,
-                                               mock_packages):
+                                               mock_repo, mock_packages):
     """
     Test the creation and installation of buildcaches with relative
     rpaths into the default directory layout scheme.
@@ -372,6 +368,7 @@ def test_relative_rpaths_create_default_layout(tmpdir, mirror_directory_rel,
                          'install_dir_default_layout')
 def test_relative_rpaths_install_default_layout(tmpdir, config_setup,
                                                 mock_stage,
+                                                mock_repo,
                                                 mock_packages):
     """
     Test the creation and installation of buildcaches with relative
@@ -432,6 +429,7 @@ def test_relative_rpaths_install_default_layout(tmpdir, config_setup,
                          'install_dir_non_default_layout')
 def test_relative_rpaths_install_nondefault(tmpdir, config_setup,
                                             mock_stage,
+                                            mock_repo,
                                             mock_packages):
     """
     Test the installation of buildcaches with relativized rpaths
