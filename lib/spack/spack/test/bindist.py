@@ -184,7 +184,9 @@ def config_setup():
 def test_default_rpaths_create_install_default_layout(tmpdir,
                                                       mirror_directory_def,
                                                       config_setup,
-                                                      mock_stage):
+                                                      mock_stage,
+                                                      mock_packages,
+                                                      ):
     """
     Test the creation and installation of buildcaches with default rpaths
     into the default directory layout scheme.
@@ -276,7 +278,8 @@ def test_default_rpaths_create_install_default_layout(tmpdir,
 @pytest.mark.usefixtures('default_config', 'cache_directory',
                          'install_dir_non_default_layout')
 def test_default_rpaths_install_nondefault_layout(tmpdir, config_setup,
-                                                  mock_stage):
+                                                  mock_stage,
+                                                  mock_packages):
     """
     Test the creation and installation of buildcaches with default rpaths
     into the non-default directory layout scheme.
@@ -320,7 +323,8 @@ def test_default_rpaths_install_nondefault_layout(tmpdir, config_setup,
 @pytest.mark.usefixtures('default_config', 'cache_directory',
                          'install_dir_default_layout')
 def test_relative_rpaths_create_default_layout(tmpdir, mirror_directory_rel,
-                                               config_setup, mock_stage):
+                                               config_setup, mock_stage,
+                                               mock_packages):
     """
     Test the creation and installation of buildcaches with relative
     rpaths into the default directory layout scheme.
@@ -367,7 +371,8 @@ def test_relative_rpaths_create_default_layout(tmpdir, mirror_directory_rel,
 @pytest.mark.usefixtures('default_config', 'cache_directory',
                          'install_dir_default_layout')
 def test_relative_rpaths_install_default_layout(tmpdir, config_setup,
-                                                mock_stage):
+                                                mock_stage,
+                                                mock_packages):
     """
     Test the creation and installation of buildcaches with relative
     rpaths into the default directory layout scheme.
@@ -426,7 +431,8 @@ def test_relative_rpaths_install_default_layout(tmpdir, config_setup,
 @pytest.mark.usefixtures('default_config', 'cache_directory',
                          'install_dir_non_default_layout')
 def test_relative_rpaths_install_nondefault(tmpdir, config_setup,
-                                            mock_stage):
+                                            mock_stage,
+                                            mock_packages):
     """
     Test the installation of buildcaches with relativized rpaths
     into the non-default directory layout scheme.
